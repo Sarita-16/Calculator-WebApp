@@ -1,0 +1,304 @@
+/*  
+'*' = For all
+'.' = For class
+'#' = For id
+*/
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    outline: 0;
+    transition: all 0.5s ease;
+  }
+  
+  body {
+    font-family: sans-serif;
+  }
+  
+  a {
+    text-decoration: none;
+    color: white;
+  }
+  
+  body {
+    background-image: linear-gradient(to bottom right, rgb(2, 9, 39), rgb(103, 145, 223));
+  }
+  
+  .container {
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    place-items: center;
+  }
+  
+  .calculator {
+    position: relative;
+    height: auto;
+    width: auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 30px black;
+  }
+  
+  /*  ----------------------------------------------------------------------------------------------------------------------------------------  */
+  .wrapper {
+    text-align: center;
+  }
+  
+  /* Mixins */
+  /*  Day State */
+  .toggle {
+    position: relative;
+    display: inline-block;
+    width: 100px;
+    margin-left: 100px;
+    padding: 4px;
+    border-radius: 40px;
+  }
+  
+  .toggle:before,
+  .toggle:after {
+    content: "";
+    display: table;
+  }
+  
+  .toggle:after {
+    clear: both;
+  }
+  
+  .toggle-bg {
+    position: absolute;
+    top: -10px;
+    left: 80px;
+    width: 70%;
+    height: 70%;
+    background-color: #C0E6F6;
+    border-radius: 20px;
+    border: 5px solid #81C0D5;
+    transition: all 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  .toggle-input {
+    position: absolute;
+    top: -4px;
+    left: 67px;
+    width: 100%;
+    height: 57%;
+    border: 1px solid red;
+    /* border-radius: 40px; */
+    z-index: 2;
+    opacity: 0;
+  }
+  
+  .toggle-switch {
+    position: relative;
+    width: 25px;
+    height: 25px;
+    margin-left: 115px;
+    margin-bottom: 33px;
+    background-color: #F5EB42;
+    border: 4px solid #E4C74D;
+    border-radius: 50%;
+    transition: all 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  .toggle-switch-figure {
+    position: absolute;
+    bottom: -14px;
+    left: -50px;
+    display: block;
+    width: 80px;
+    height: 30px;
+    border: 8px solid #D4D4D2;
+    border-radius: 20px;
+    background-color: #fff;
+    transform: scale(0.4);
+    transition: all 0.12s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .toggle-switch-figure:after {
+    content: "";
+    display: block;
+    position: relative;
+    top: -65px;
+    right: -42px;
+    width: 15px;
+    height: 15px;
+    border: 8px solid #D4D4D2;
+    border-radius: 100%;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    transform: rotateZ(70deg);
+    background-color: #fff;
+  }
+  .toggle-switch-figure:before {
+    content: "";
+    display: block;
+    position: relative;
+    top: -25px;
+    right: -10px;
+    width: 30px;
+    height: 30px;
+    border: 8px solid #D4D4D2;
+    border-radius: 100%;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    transform: rotateZ(30deg);
+    background-color: #fff;
+  }
+  
+  .toggle-switch-figureAlt {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 2px;
+    width: 2px;
+    height: 2px;
+    background-color: #EFEEDA;
+    border-radius: 100%;
+    border: 4px solid #DEE1C5;
+    transition: all 0.12s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: scale(0);
+  }
+  
+  .toggle-switch-figureAlt:before {
+    content: "";
+    position: absolute;
+    top: -13px;
+    left: 18px;
+    width: 0px;
+    height: 0px;
+    background-color: #EFEEDA;
+    border-radius: 100%;
+    border: 3px solid #DEE1C5;
+  }
+  
+  .toggle-switch-figureAlt:after {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 30px;
+    width: 0px;
+    height: 0px;
+    background-color: #EFEEDA;
+    border-radius: 100%;
+    border: 3px solid #DEE1C5;
+  }
+  
+  /*  Night State */
+  .toggle-input:checked ~ .toggle-switch {
+    margin-top: -4px;
+    margin-left: 84px;
+    border-color: #DEE1C5;
+    background-color: #FFFDF2;
+  }
+  
+  .toggle-input:checked ~ .toggle-bg {
+    background-color: #484848;
+    border-color: #202020;
+  }
+  
+  .toggle-input:checked ~ .toggle-switch .toggle-switch-figure {
+    margin-left: 40px;
+    opacity: 0;
+    transform: scale(0.1);
+  }
+  
+  .toggle-input:checked ~ .toggle-switch .toggle-switch-figureAlt {
+    transform: scale(1);
+  }
+  
+  /* ----------------------------------------------------------------------------------------------------------------------------------- */
+  #display {
+    margin: 0 10px;
+    height: 150px;
+    width: auto;
+    max-width: 270px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    font-size: 30px;
+    margin-bottom: 20px;
+    overflow-x: scroll;
+  }
+  
+  #display::-webkit-scrollbar {
+    display: block;
+    height: 3px;
+  }
+  
+  button {
+    height: 60px;
+    width: 60px;
+    border: 0;
+    border-radius: 30px;
+    margin: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 200ms ease;
+  }
+  
+  button:hover {
+    transform: scale(1.1);
+  }
+  
+  button#equal {
+    width: 100%;
+  }
+  
+  /* ------------------ Light Theme ---------------- */
+  .calculator {
+    background-color: #fff;
+  }
+  
+  .calculator #display {
+    color: #01070d;
+  }
+  
+  .calculator button#clear {
+    background-color: rgb(253, 203, 203);
+    color: rgb(78, 14, 14);
+  }
+  
+  .calculator button.btn-number {
+    background-color: #c3eaff;
+    color: rgb(5, 41, 72);
+  }
+  
+  .calculator button.btn-operator {
+    background-color: #ffd0fd;
+    color: #5c0b59;
+  }
+  
+  .calculator button.btn-equal {
+    background-color: #8ee4b4;
+    color: #053d19;
+  }
+  
+  /* ------------------------ Dark Theme --------------------- */
+  .calculator.dark {
+    background-color: #080122;
+  }
+  
+  .calculator.dark #display {
+    color: #ffffff;
+  }
+  
+  .calculator.dark button#clear {
+    background-color: #79122c;
+    color: #ef888f;
+  }
+  
+  .calculator.dark button.btn-number {
+    background-color: #085b81;
+    color: #a9d5eb;
+  }
+  
+  .calculator.dark button.btn-operator {
+    background-color: #611594;
+    color: #d26ace;
+  }
+  
+  .calculator.dark button.btn-equal {
+    background-color: #0a9144;
+    color: #99ddb0;
+  }
